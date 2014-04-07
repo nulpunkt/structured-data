@@ -96,8 +96,10 @@
 (defn author->string [author]
   (let [author-name (:name author)
         birth (:birth-year author "")
+        death (:death-year author "")
+        birth-and-death (if (empty? (str birth death)) "" (str" (" birth " - " death ")"))
        ]
-  (str author-name birth)
+  (str author-name birth-and-death)
 ))
 
 (defn authors->string [authors]
