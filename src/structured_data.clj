@@ -108,8 +108,20 @@
 (defn book->string [book]
   (str (:title book) ", written by " (authors->string (:authors book))))
 
+(defn book-count->string [books]
+  (cond
+    (empty? books) "No books"
+    (== (count books) 1) "1 book"
+    :else (str (count books) " books"))
+)
+
 (defn books->string [books]
-  :-)
+  (let [the-books (apply str (interpose ", " (map book->string books)))
+        the-books-dot (if (empty? the-books) "" (str " " the-books "."))
+       ]
+   (str (book-count->string books) "." the-books-dot)
+  )
+)
 
 (defn books-by-author [author books]
   :-)
